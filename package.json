@@ -8,9 +8,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "*",
     "body-parser": "*",
-    "ejs": "*"
+    "ejs": "^2.5.7",
+    "express": "*"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "indoor"
   ],
   "author": "Matheus Moscardini",
-  "license": "CPOL-1.02",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mmoscardini/Guru-Verde-Landing-Page/issues"
   },
