@@ -10,7 +10,8 @@
   "dependencies": {
     "body-parser": "*",
     "ejs": "^2.5.7",
-    "express": "*"
+    "express": "*",
+    "nodemailer": "^4.1.0"
   },
   "repository": {
     "type": "git",
