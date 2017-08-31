@@ -1,0 +1,32 @@
+{
+  "name": "guru-verde-landing-page",
+  "version": "1.0.0",
+  "description": "Landing page criada para capitação de leads e teste de fumaça  para ecommerce de plantas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "ejs": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmoscardini/Guru-Verde-Landing-Page.git"
+  },
+  "keywords": [
+    "plantas",
+    "ecommerce",
+    "cuidados",
+    "guia",
+    "indoor"
+  ],
+  "author": "Matheus Moscardini",
+  "license": "CPOL-1.02",
+  "bugs": {
+    "url": "https://github.com/mmoscardini/Guru-Verde-Landing-Page/issues"
+  },
+  "homepage": "https://github.com/mmoscardini/Guru-Verde-Landing-Page#readme"
+}
