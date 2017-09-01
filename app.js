@@ -48,14 +48,15 @@ app.post('/mailSent', (request, response, next)=>{
     transporter.sendMail(mailOptions, (err, info)=>{
         if(err) {
             console.log(err);
-            response.send(err);                
+            response.send(err);    
+            return            
         }
         console.log('Message sent: ' + info.messageId);
         // Preview only available when sending through an Ethereal account
         console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
         //console.log (mailOptions.from);
         console.log(mailOptions);
-        response.render('/pages/mailSent')  
+        response.render('pages/mailSent');
     });
 });
 
