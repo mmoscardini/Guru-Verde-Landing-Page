@@ -55,7 +55,7 @@ app.post('/mailSent', (request, response, next)=>{
         console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
         //console.log (mailOptions.from);
         console.log(mailOptions);
-        response.render('/pages/mailSend')  
+        response.render('/pages/mailSent')  
     });
 });
 
