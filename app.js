@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const xoauth2 = require('xoauth2');
-const fs = require('fs');
 
 const app = express();
 
@@ -18,14 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Set path to view and view engine to ejs
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
-//Read json config file
-var googleConfig;
-fs.readFile(__dirname + '/etc/googleConfig.json', 'utf8', (err, data) => {
-    if (err) throw err;
-    var obj = JSON.parse(data);
-    googleConfig = obj;
-  });
 
 
 //Root get function
