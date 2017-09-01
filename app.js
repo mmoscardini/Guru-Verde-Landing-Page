@@ -31,25 +31,10 @@ app.post('/mailSent', (request, response, next)=>{
         host: 'smtp.gmail.com',
         auth: {
             type: 'OAuth2',
-            user: process.env.USER,
-            clientId: process.env.CLIENTID,
-            clientSecret: process.env.CLIENTSECRET,
-            refreshToken: process.env.REFRESHTOKEN
-            /*
-
-            type: 'OAuth2',
-            user: 'mmoscardini02@gmail.com',
-            clientId: '1068201702160-5o5hv126rvlqjg2e74btf9qrs8eu0bpa.apps.googleusercontent.com',
-            clientSecret: 'NTTev0uVr1zT6Gwp4tbfGBbF',
-            refreshToken: '1/3UfkVmm6PkAAMDXMyR19lXDXXGGA939HF8rHSyzJZqE3-V_CP79tX21LKCcFgDK6'
-
-            xoauth2: xoauth2.createXOAuth2Generator({
-                user: 'mmoscardini02@gmail.com',
-                clientId: '1068201702160-5o5hv126rvlqjg2e74btf9qrs8eu0bpa.apps.googleusercontent.com',
-                clientSecret: 'NTTev0uVr1zT6Gwp4tbfGBbF',
-                refreshToken: '1/3UfkVmm6PkAAMDXMyR19lXDXXGGA939HF8rHSyzJZqE3-V_CP79tX21LKCcFgDK6',
-                accessToken: 'ya29.Glu5BKV7RpiS-veVxDA90jhtHgHhTAEIL42kwA66VSm4-dAH8udtluD3wFOvMijyZg22600FdFMpwgAZVgNG-UD1uEjoTE-uO8rHPCAFKFPTDkNE8ro1iACWGhHD'
-           })*/
+            user: process.env.user,
+            clientId: process.env.clientId,
+            clientSecret: process.env.clientSecret,
+            refreshToken: process.env.refreshToken
         }
     });
     
