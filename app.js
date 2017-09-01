@@ -37,8 +37,6 @@ app.post('/mailSent', (request, response, next)=>{
             refreshToken: process.env.refreshToken
         }
     });
-    
-  
 
     let mailOptions = {
             from: request.body.email,
@@ -56,7 +54,8 @@ app.post('/mailSent', (request, response, next)=>{
         // Preview only available when sending through an Ethereal account
         console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
         //console.log (mailOptions.from);
-        response.send(mailOptions);  
+        console.log(mailOptions);
+        response.render('/pages/mailSend')  
     });
 });
 
