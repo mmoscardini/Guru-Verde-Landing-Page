@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const xoauth2 = require('xoauth2');
+const fs = require('fs');
 
 const app = express();
 
@@ -17,6 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+//Read json config file
+var googleConfig;
+fs.readFile(__dirname + '/etc/googleConfig.json', 'utf8', (err, data) => {
+    if (err) throw err;
+    var obj = JSON.parse(data);
+    googleConfig = obj;
+  });
+
+
 //Root get function
 app.get('/', function(request, response,next) {
     response.render('pages/index');
@@ -24,11 +35,30 @@ app.get('/', function(request, response,next) {
 
 //Post email enviado
 app.post('/mailSent', (request, response, next)=>{
-    var transport = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
         service: 'Gmail',
+        host: 'smtp.gmail.com',
         auth: {
-            user: "mmoscardini02@gmail.com",
-            pass: 'KRIPTOGRAFAR ESSA SENHA AQUI'
+            type: 'OAuth2',
+            user: process.env.USER,
+            clientId: process.env.CLIENTID,
+            clientSecret: process.env.CLIENTSECRET,
+            refreshToken: process.env.REFRESHTOKEN
+            /*
+
+            type: 'OAuth2',
+            user: 'mmoscardini02@gmail.com',
+            clientId: '1068201702160-5o5hv126rvlqjg2e74btf9qrs8eu0bpa.apps.googleusercontent.com',
+            clientSecret: 'NTTev0uVr1zT6Gwp4tbfGBbF',
+            refreshToken: '1/3UfkVmm6PkAAMDXMyR19lXDXXGGA939HF8rHSyzJZqE3-V_CP79tX21LKCcFgDK6'
+
+            xoauth2: xoauth2.createXOAuth2Generator({
+                user: 'mmoscardini02@gmail.com',
+                clientId: '1068201702160-5o5hv126rvlqjg2e74btf9qrs8eu0bpa.apps.googleusercontent.com',
+                clientSecret: 'NTTev0uVr1zT6Gwp4tbfGBbF',
+                refreshToken: '1/3UfkVmm6PkAAMDXMyR19lXDXXGGA939HF8rHSyzJZqE3-V_CP79tX21LKCcFgDK6',
+                accessToken: 'ya29.Glu5BKV7RpiS-veVxDA90jhtHgHhTAEIL42kwA66VSm4-dAH8udtluD3wFOvMijyZg22600FdFMpwgAZVgNG-UD1uEjoTE-uO8rHPCAFKFPTDkNE8ro1iACWGhHD'
+           })*/
         }
     });
     
@@ -38,18 +68,18 @@ app.post('/mailSent', (request, response, next)=>{
             from: request.body.email,
             to: 'matheus_moscardini@yahoo.com.br',
             subject: 'Novo Lead Guru Verde',
-            text: request.body.name + ' ' + request.body.email +' ' + request.body.quantasPlantas
+            text: 'Nome: ' + request.body.nome + '|| Email: ' + request.body.email +'|| Quantas plantas: ' + request.body.quantasPlantas
     };
 
-    transport.sendMail(mailOptions, (err, info)=>{
+    transporter.sendMail(mailOptions, (err, info)=>{
         if(err) {
             console.log(err);
             response.send(err);                
         }
-        console.log('Message sent: %s', info.messageId);
+        console.log('Message sent: ' + info.messageId);
         // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        console.log (mailOptions.from);
+        console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info));
+        //console.log (mailOptions.from);
         response.send(mailOptions);  
     });
 });
